@@ -1,9 +1,19 @@
 # Load the code (the R equivalent of addpath(genpath('matlab/')))
-for (f in list.files("R", pattern = "\\.R$", recursive = TRUE, full.names = TRUE)) source(f)
+# Locate the folder holding this script, so it works from any working directory
+# (via source() or Rscript); otherwise fall back to the working directory.
+here <- tryCatch(dirname(sys.frame(1)$ofile), error = function(e) {
+  arg <- grep("^--file=", commandArgs(FALSE), value = TRUE)
+  if (length(arg)) dirname(sub("^--file=", "", arg)) else getwd()
+})
+r_files <- list.files(file.path(here, "R"), pattern = "\\.R$", recursive = TRUE, full.names = TRUE)
+if (length(r_files) == 0) {
+  stop("Could not find the R/ folder in '", here, "'. Set the working directory to the BiWeb folder first, e.g. setwd(\"path/to/BiWeb\").")
+}
+for (f in r_files) source(f)
 
 # Create an object of the class Bipartite. By just creating it,
 # nestedness will be calculated;
-w <- Reading$CREATE_FROM_MATRIX_WITH_LABELS("sampledata/rodents.web")
+w <- Reading$CREATE_FROM_MATRIX_WITH_LABELS(file.path(here, "sampledata", "rodents.web"))
 
 # Accessing the values of nestedness
 nodf <- w$nestedness$nodf
