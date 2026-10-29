@@ -1,11 +1,12 @@
 # BiWeb
 
-BiWeb is a framwork designed facilitate the analysis of bipartite (two-mode) ecological networks. It is currently implemented in two languages:
+BiWeb is a framwork designed facilitate the analysis of bipartite (two-mode) ecological networks. It is currently implemented in three languages:
 
 * `biweb-py`, written in Python
 * `biweb-ml`, written in MatLab
+* `biweb-r`, written in R (a translation of `biweb-ml`; see `R_example.R`)
 
-The details of the implementations vary across languages, but the  two version provide the same set of core features, with a very similar syntax.
+The details of the implementations vary across languages, but the versions provide the same set of core features, with a very similar syntax.
 
 ### Authors
 
